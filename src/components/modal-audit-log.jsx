@@ -110,14 +110,6 @@ const AuditLogModal = ({ isOpen, onClose, role }) => {
             </div>
           )}
         </div>
-
-        {logs.length > 0 && (
-          <div className="modal-footer">
-            <button className="clear-all-btn" onClick={handleClearLogs}>
-              <FaTrash /> Clear All Logs
-            </button>
-          </div>
-        )}
       </div>
     </div>
   );

@@ -16,6 +16,7 @@ import {
   FaBullhorn,
   FaFileContract,
   FaExclamationTriangle,
+  FaArrowLeft,
 } from "react-icons/fa";
 import { logAuditAction } from "../utils/auditLogger";
 import TermsModal from "../components/modal-terms";
@@ -120,7 +121,19 @@ export default function SignIn() {
   const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name } = e.target;
+    let { value } = e.target;
+
+    if (name === "middleName") {
+      value = value.toUpperCase();
+    } else if (name === "firstName" || name === "lastName") {
+      value = value
+        .split(" ")
+        .map((word) =>
+          word ? word.charAt(0).toUpperCase() + word.slice(1) : ""
+        )
+        .join(" ");
+    }
 
     // Clear errors and notifications
     setErrors((prevErrors) => ({ ...prevErrors, [name]: false }));
@@ -417,7 +430,10 @@ export default function SignIn() {
           </div>
         ) : (
           <form className="sign-box" onSubmit={handleSubmit}>
-            <h1>Sign Up</h1>
+            <Link to="/" className="back-to-home-link">
+              <FaArrowLeft /> Back to Home
+            </Link>
+            <h1 style={{ marginTop: "15px" }}>Sign Up</h1>
             <h2>------</h2>
             <h3>Fill up information</h3>
 

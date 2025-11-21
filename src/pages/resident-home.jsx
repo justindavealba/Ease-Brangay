@@ -123,6 +123,45 @@ const ResidentPageContent = () => {
     }
   }, [isAnyModalOpen]);
 
+  // --- Real-time Notification Polling ---
+  useEffect(() => {
+    const userProfile = JSON.parse(localStorage.getItem("userProfile"));
+    if (!userProfile?.id) return;
+
+    const pollNotifications = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:5000/api/notifications/${userProfile.id}`
+        );
+        if (response.ok) {
+          const serverNotifications = await response.json();
+
+          // Find notifications that are on the server but not in the current state
+          const newNotifications = serverNotifications.filter(
+            (serverNotif) =>
+              !notifications.some(
+                (localNotif) => localNotif.id === serverNotif.id
+              )
+          );
+
+          if (newNotifications.length > 0) {
+            // Show a toast for each new notification
+            newNotifications.forEach((notif) => {
+              toast.info(notif.message);
+            });
+            // Update the state with all notifications from the server
+            setNotifications(serverNotifications);
+          }
+        }
+      } catch (error) {
+        console.error("Polling for notifications failed:", error);
+      }
+    };
+
+    const intervalId = setInterval(pollNotifications, 15000); // Poll every 15 seconds
+    return () => clearInterval(intervalId); // Cleanup on component unmount
+  }, [notifications]); // Rerun if local notifications state changes
+
   const getCategoryClass = (categoryName) => {
     if (!categoryName) return "category-general";
     return `category-${categoryName.toLowerCase().replace(/\s+/g, "-")}`;

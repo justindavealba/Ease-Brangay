@@ -1,3 +1,8 @@
 *.log
-backend/.env
+.env
 
+# Dependencies
+/node_modules
+
+# User-uploaded files
+/uploads

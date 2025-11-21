@@ -273,10 +273,10 @@
   position: relative;
   background: var(--bg-primary);
   border-radius: 16px;
-  padding: 20px;
-  margin-top: 11px;
+  padding: 20px; /* Keep padding */
+  margin: 0 auto 20px auto; /* Center the card and add bottom margin */
   box-shadow: var(--card-shadow);
-  width: 650px;
+  width: 85%; /* Use percentage for responsiveness */
   transition: box-shadow 0.3s ease, transform 0.2s ease;
 }
 
@@ -432,9 +432,10 @@
 
 .update-images-1 {
   grid-template-columns: 1fr;
-  position: relative; /* Make container relative */
-  padding-top: 75%; /* Default aspect ratio (e.g., 4:3). Adjust as needed. */
-  height: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   max-height: 500px;
 }
 .update-images-2 {
@@ -448,9 +449,9 @@
   grid-auto-rows: 150px;
 }
 .update-images-1 img {
-  position: absolute; /* Position image inside the container */
-  top: 0;
-  left: 0;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
 }
 .update-images-3 img:nth-child(1) {
   grid-column: 1 / 2;

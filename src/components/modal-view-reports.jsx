@@ -328,9 +328,7 @@ const ViewReportsModal = ({
 
             <div className="details-footer">
               {/* Show Cancel button for active reports */}
-              {["submitted", "reviewed", "in-progress", "approved"].includes(
-                selectedReport.status
-              ) ? (
+              {["submitted"].includes(selectedReport.status) ? (
                 <button
                   className="cancel-report-btn"
                   onClick={handleCancelClick}

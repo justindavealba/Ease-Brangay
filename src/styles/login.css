@@ -107,7 +107,7 @@
 .login-box {
   background: rgba(242, 242, 245, 0.95);
   padding: 3rem 3rem;
-  max-height: 90vh;
+  max-height: 80vh;
   width: 450px;
   display: flex;
   flex-direction: column;

@@ -415,8 +415,8 @@
   position: relative;
   background: var(--bg-primary);
   border-radius: 16px;
-  padding: 20px;
-  margin-left: 35px;
+  padding: 20px; /* Keep padding */
+  margin: 0 auto 20px auto; /* Center the card and add bottom margin */
   box-shadow: var(--card-shadow);
   width: 85%; /* Use full width of the container */
   transition: box-shadow 0.3s ease, transform 0.2s ease;
@@ -808,22 +808,183 @@
 .update-images {
   display: grid;
   gap: 8px;
+
   margin-top: 14px;
   margin-left: -20px;
   margin-right: -20px;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(150px, 1fr)
+  ); /* fixed typo and reasonable min */
 }
 
 .update-images img {
   width: 100%;
+  height: 220px; /* increased height for many images */
+  object-fit: cover; /* crop while maintaining aspect */
+  cursor: zoom-in;
+}
+
+/* Single image: fill available width and cap height so it appears large but not oversized */
+.update-images-1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Expand single-image container to match feed gutters */
+  width: calc(100% + 40px);
+  margin-left: -20px;
+  margin-right: -20px;
+  max-height: 80vh; /* cap so it doesn't overflow viewport */
+}
+
+.update-images-1 img {
+  width: 100%; /* maximize width */
+  height: auto; /* preserve aspect ratio */
+  max-height: 80vh; /* cap height to viewport */
+  object-fit: contain; /* show full image without cropping */
+  border-radius: 8px;
+}
+
+/* Two images: larger rows */
+.update-images-2 {
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: 260px; /* taller rows for 2 images */
+}
+
+/* Three images layout: make rows taller and keep first image spanning two rows */
+.update-images-3 {
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: 260px;
+}
+.update-images-3 img:nth-child(1) {
+  grid-column: 1 / 2;
+  grid-row: 1 / 3;
+}
+
+/* Four images layout: taller rows */
+.update-images-4 {
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 260px;
+}
+.update-images-4 img:nth-child(1) {
+  grid-row: 1 / 3;
+  grid-column: 1 / 2;
   height: 100%;
-  object-fit: contain;
-  object-fit: cover;
+}
+
+/* make overlay sizes match new heights */
+.image-count-overlay,
+.preview-count-overlay {
+  height: 100%;
+}
+
+/* Feed Image Grid - fixed and improved heights for multi-image posts */
+.update-images {
+  display: grid;
+  gap: 8px;
+  margin-top: 14px;
+  margin-left: -20px;
+  margin-right: -20px;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(150px, 1fr)
+  ); /* fixed typo and reasonable min */
+}
+
+/* default image size for multi-image layouts (make them taller) */
+.update-images img {
+  width: 100%;
+  height: 220px; /* increased height for many images */
+  object-fit: cover; /* crop while maintaining aspect */
+  cursor: zoom-in;
+}
+
+/* Single image: fill available width and cap height so it appears large but not oversized */
+.update-images-1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Expand single-image container to match feed gutters */
+  width: calc(100% + 40px);
+  margin-left: -20px;
+  margin-right: -20px;
+  max-height: 80vh; /* cap so it doesn't overflow viewport */
+}
+
+.update-images-1 img {
+  width: 100%; /* maximize width */
+  height: auto; /* preserve aspect ratio */
+  max-height: 80vh; /* cap height to viewport */
+  object-fit: contain; /* show full image without cropping */
+  border-radius: 8px;
+}
+
+/* Two images: larger rows */
+.update-images-2 {
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: 260px; /* taller rows for 2 images */
+}
+
+/* Three images layout: make rows taller and keep first image spanning two rows */
+.update-images-3 {
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: 260px;
+}
+.update-images-3 img:nth-child(1) {
+  grid-column: 1 / 2;
+  grid-row: 1 / 3;
+}
+
+/* Four images layout: taller rows */
+.update-images-4 {
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 260px;
+}
+.update-images-4 img:nth-child(1) {
+  grid-row: 1 / 3;
+  grid-column: 1 / 2;
+  height: 100%;
+}
+
+/* make overlay sizes match new heights */
+.image-count-overlay,
+.preview-count-overlay {
+  height: 100%;
+}
+
+/* Feed Image Grid */
+.update-images {
+  display: grid;
+  gap: 8px;
+  margin-top: 14px;
+  margin-left: -20px;
+  margin-right: -20px;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(15x, 1fr)
+  ); /* Responsive grid */
+}
+
+.update-images img {
+  width: 100%;
+  height: 150px; /* Fixed height for cropping */
+  object-fit: cover; /* Crop the image */
   cursor: zoom-in;
 }
 
 .update-images-1 {
-  grid-template-columns: 1fr;
-  max-height: 500px; /* Set a max-height for single images */
+  display: flex; /* Use flexbox for centering */
+  justify-content: center; /* Center the image horizontally */
+  align-items: center; /* Center the image vertically */
+  width: 100%; /* Ensure it takes full width */
+  height: auto; /* Allow height to adjust based on content */
+}
+
+.update-images-1 img {
+  width: 100%; /* Make the image take full width */
+  height: auto; /* Maintain aspect ratio */
+  max-height: 100%; /* Ensure the image does not exceed the container height */
+  object-fit: cover; /* Cover the area while maintaining aspect ratio */
 }
 .update-images-2 {
   grid-template-columns: repeat(2, 1fr);
@@ -1689,11 +1850,11 @@
   margin-bottom: 20px;
 }
 
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+/* Hide "Clear all logs" button variants (quick CSS override) */
+#clearAllLogs,
+.clear-all-logs-btn,
+.clear-logs-btn,
+button[data-action="clear-logs"] {
+  display: none !important;
+  visibility: hidden !important;
 }

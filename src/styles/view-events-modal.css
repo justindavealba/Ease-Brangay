@@ -1,0 +1,89 @@
+.view-events-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1050;
+  animation: fadeInOverlay 0.3s ease;
+}
+
+.view-events-modal-content {
+  background: var(--bg-primary);
+  padding: 25px;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 550px; /* Increased width */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  animation: slideUpModal 0.4s ease;
+  min-height: 300px; /* Added minimum height */
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.view-events-modal-content .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.view-events-modal-content .close-btn {
+    position: static; /* Override absolute positioning from other stylesheets */
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+
+.view-events-modal-content .modal-header h2 {
+  font-size: 1.2rem;
+}
+
+.events-modal-list {
+  overflow-y: auto;
+  margin-top: 1rem;
+  padding-right: 10px;
+}
+
+.event-modal-item {
+  background: var(--bg-secondary);
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.event-modal-item:not(:last-child) {
+  margin-bottom: 12px;
+}
+
+.event-modal-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 5px 0;
+}
+
+.event-modal-desc {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.view-events-modal-content .no-events-message {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-secondary);
+}

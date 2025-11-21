@@ -1,0 +1,255 @@
+.post-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Align modal to the top */
+  padding-top: 5vh;
+  z-index: 1050; /* Ensure it's above the header (z-index: 1000) */
+  animation: fadeInOverlay 0.35s ease forwards;
+}
+
+@keyframes fadeInOverlay {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(10px);
+  }
+}
+
+.post-modal-content {
+  background: var(--bg-primary);
+  border-radius: 16px;
+  padding: 25px;
+  width: 620px;
+  max-width: 90vw;
+  max-height: 85vh;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  animation: slideUpModal 0.4s ease forwards;
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes slideUpModal {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.post-modal-content .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.post-modal-content .modal-header h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-top: -10px;
+  margin-bottom: 15px;
+  color: var(--brand-primary);
+}
+
+.post-modal-content .close-btn {
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+.post-modal-content .close-btn:hover {
+  background: #e5e7eb;
+  color: var(--text-primary);
+  transform: rotate(90deg);
+}
+
+.post-modal-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  flex-grow: 1;
+  overflow-y: auto;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.post-modal-content form::-webkit-scrollbar {
+  display: none;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.post-modal-content input[type="text"],
+.post-modal-content textarea,
+.post-modal-content select {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: 8px;
+  border: 1px solid var(--border-secondary);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-size: 15px;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+.post-modal-content textarea {
+  min-height: 120px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.post-modal-content input[type="text"]:focus,
+.post-modal-content textarea:focus,
+.post-modal-content select:focus {
+  outline: none;
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+}
+/* Category Dropdown Specific Styles */
+.category-group .select-wrapper {
+  position: relative;
+}
+
+.category-group select {
+  width: 100%;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding-right: 40px; /* Make space for the arrow */
+}
+
+.category-group .select-arrow-icon {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-tertiary);
+  pointer-events: none; /* Allows clicks to pass through to the select */
+}
+.file-upload-label {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  padding: 20px;
+  border: 2px dashed var(--border-secondary);
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  color: var(--text-tertiary);
+  background-color: var(--bg-secondary);
+}
+
+.file-upload-label:hover {
+  border-color: var(--brand-primary);
+  background-color: var(--bg-primary);
+  color: var(--brand-primary);
+}
+
+.file-upload-label svg {
+  font-size: 24px;
+}
+
+.file-upload-label span {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.modal-footer {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.post-modal-content button[type="submit"] {
+  padding: 12px 20px;
+  border-radius: 10px;
+  border: none;
+  background: var(--brand-primary);
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.post-modal-content button[type="submit"]:hover:not(:disabled) {
+  background: #1d4ed8;
+}
+
+.post-modal-content button[type="submit"]:disabled {
+  background: var(--text-tertiary);
+  cursor: not-allowed;
+}
+
+/* IMAGE PREVIEW */
+.preview-image-container {
+  position: relative;
+  /* width: 90%; */ /* Let the grid handle it */
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.remove-preview-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  opacity: 0;
+}
+
+.preview-image-container:hover .remove-preview-btn {
+  opacity: 1;
+}
+
+.remove-preview-btn:hover {
+  background: #ef4444;
+  transform: scale(1.1);
+}

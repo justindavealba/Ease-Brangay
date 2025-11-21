@@ -1,0 +1,277 @@
+/* ======================================================== */
+/* NOTIFICATION MODAL STYLES */
+/* ======================================================== */
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+}
+
+.notification-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeInOverlay 0.35s ease forwards;
+}
+
+.notification-modal-content {
+  background: var(--bg-primary);
+  border-radius: 16px;
+  padding: 20px 0 0 0; /* Remove bottom and side padding */
+  width: 700px;
+  margin-top: 50px;
+  max-width: 700px;
+  height: 80vh;
+  max-height: 700px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  animation: slideUpModal 0.4s ease forwards;
+  position: relative; /* Needed for the submission overlay */
+  overflow: hidden; /* Hide spinner overflow */
+}
+
+/* --- Submission Overlay (for loading states) --- */
+.notification-modal-content .submission-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(4px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  border-radius: 16px;
+  color: var(--text-primary);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+[data-theme="dark"] .notification-modal-content .submission-overlay {
+  background: rgba(24, 24, 27, 0.8);
+}
+
+.notification-modal-content .submission-overlay .spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid var(--brand-primary);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+.notification-modal-content .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 12px;
+  padding-left: 24px; /* Add padding back to header */
+  padding-right: 24px;
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.notification-modal-content .modal-header h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  color: var(--brand-primary);
+}
+
+.notification-modal-content .close-btn {
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  top: 25 px;
+  right: 30px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+.notification-modal-content .close-btn:hover {
+  background: #e5e7eb;
+  color: var(--text-primary);
+  transform: rotate(90deg);
+}
+
+.notification-body {
+  flex-grow: 1;
+  overflow-y: auto;
+  margin-top: 1rem;
+  padding-right: 14px; /* Adjust for scrollbar */
+  padding-left: 24px; /* Match original content padding */
+}
+
+.notification-body.no-scroll {
+  overflow-y: hidden;
+  padding-right: 0;
+}
+
+.notification-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.notification-item {
+  display: flex;
+  align-items: flex-start; /* Align items to the top */
+  gap: 15px;
+  padding: 12px;
+  border-radius: 10px;
+  background: var(--bg-secondary);
+  position: relative; /* Needed for positioning the delete button on hover */
+  border-left: 4px solid transparent;
+  transition: background-color 0.2s;
+}
+
+.notification-item.deleting {
+  animation: fadeOut 0.5s ease-out forwards;
+}
+
+.notification-item.unread {
+  background: var(--bg-tertiary);
+  border-left-color: var(--brand-primary);
+}
+
+.notification-icon .icon {
+  width: 24px;
+  height: 24px;
+}
+
+.notification-icon .report {
+  color: #3b82f6; /* Blue */
+}
+
+.notification-icon .announcement {
+  color: #16a34a; /* Green */
+}
+
+.notification-icon .new-report {
+  color: #f97316; /* Orange */
+}
+
+.notification-content {
+  flex-grow: 1; /* Allow content to take up available space */
+}
+.notification-details .message {
+  margin: 0;
+  font-size: 14px; /* Match inbox message title */
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
+.notification-details .date {
+  font-size: 13px; /* Match inbox message date */
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+/* --- NEW: Delete button for individual notifications --- */
+.notification-delete-btn {
+  position: absolute; /* Position it relative to the notification-item */
+  top: 12px;
+  right: 12px;
+  background: var(--bg-secondary);
+  border: none;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.notification-delete-btn:hover {
+  background-color: #ef4444; /* Red on hover */
+  color: white;
+}
+
+.notification-delete-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.no-notifications-placeholder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: var(--text-secondary);
+  text-align: center;
+  padding: 2rem;
+  gap: 1rem;
+}
+
+.notification-modal-content .modal-footer {
+  padding: 15px 24px; /* Match original content padding */
+  border-top: 1px solid var(--border-primary);
+  display: flex;
+  justify-content: flex-end;
+  background-color: var(
+    --bg-secondary
+  ); /* Negative margin to break out of padding (no longer needed but good practice) */
+  border-bottom-left-radius: 16px; /* Match parent border-radius */
+  border-bottom-right-radius: 16px;
+}
+
+.clear-all-btn {
+  background: #ef4444; /* Red */
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.clear-all-btn:hover {
+  background: #dc2626; /* Darker red */
+}
+
+/* Notification Badge on Bell Icon */
+.notification-bell-btn {
+  position: relative;
+}
+
+.notification-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: #ef4444; /* Red */
+  color: white;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border: 2px solid var(--bg-primary);
+}

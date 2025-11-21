@@ -1,0 +1,94 @@
+.verify-email-page {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  background: linear-gradient(rgba(13, 71, 161, 0.7), rgba(13, 71, 161, 0.7)),
+    url("../assets/bg.jpg") center/cover no-repeat;
+  justify-content: center;
+  align-items: center;
+  font-family: "Poppins", sans-serif;
+}
+
+.verify-email-box {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 3rem;
+  width: 100%;
+  max-width: 480px;
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.verify-email-box h1 {
+  font-size: 28px;
+  color: #0d47a1;
+  font-weight: 700;
+  margin: 0;
+}
+
+.verify-email-box p {
+  color: #333;
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.status-icon {
+  font-size: 60px;
+  margin-bottom: 1rem;
+  animation: pop-in 0.5s ease-out;
+}
+
+.status-icon.success {
+  color: #22c55e;
+}
+
+.status-icon.error {
+  color: #ef4444;
+}
+
+.status-icon.spinner {
+  animation: spin 1.5s linear infinite;
+  color: #0d47a1;
+}
+
+.back-to-login-btn {
+  margin-top: 1.5rem;
+  width: 100%;
+  padding: 16px;
+  background: #0d47a1;
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.back-to-login-btn:hover {
+  background: #1976d2;
+  transform: translateY(-2px);
+}
+
+@keyframes pop-in {
+  from {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

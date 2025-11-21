@@ -1,0 +1,680 @@
+.sign-page {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  margin: 0;
+  position: relative; /* This is crucial for z-index to work correctly */
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; /* Prevents scrollbars on the main page */
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+/* Styles for the video background */
+.sign-bg-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: translate(-50%, -50%);
+  z-index: -2; /* Places the video behind everything */
+}
+
+/* Styles for the dark overlay on top of the video */
+.sign-bg-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(13, 71, 161, 0.7); /* Same overlay color as login */
+  z-index: -1; /* Places the overlay behind the content but on top of the video */
+}
+
+/* ======================================================== */
+/* FONT SIZE VARIABLES */
+/* ======================================================== */
+[data-font-size="small"] {
+  --font-size-base: 13px;
+  --font-size-lg: 15px;
+  --font-size-xl: 17px;
+}
+[data-font-size="medium"] {
+  --font-size-base: 14px;
+  --font-size-lg: 16px;
+  --font-size-xl: 18px;
+}
+[data-font-size="large"] {
+  --font-size-base: 15px;
+  --font-size-lg: 17px;
+  --font-size-xl: 19px;
+}
+
+.sign-content-wrapper {
+  display: flex;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  backdrop-filter: blur(15px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  z-index: 1; /* Ensures the content wrapper is on top of the background */
+}
+
+.sign-promo {
+  flex: 1;
+  padding: 4rem;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.promo-logo-container img {
+  width: 100px;
+  height: 100px;
+  animation: logo-fade-in-up 0.8s ease-out forwards;
+}
+.sign-box {
+  background: rgba(242, 242, 245, 0.95);
+  padding: 3rem 3rem;
+  max-height: 75vh;
+  max-width: 62vh;
+  flex-basis: 55%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0 24px 24px 0;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Custom scrollbar styling */
+.sign-box::-webkit-scrollbar {
+  width: 8px;
+}
+
+.sign-box::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+}
+
+.sign-box::-webkit-scrollbar-thumb {
+  background: rgba(13, 71, 161, 0.3);
+  border-radius: 10px;
+}
+
+.sign-box::-webkit-scrollbar-thumb:hover {
+  background: rgba(13, 71, 161, 0.5);
+}
+
+.sign-box h1 {
+  font-size: 30px;
+  text-align: left;
+  color: #111;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  margin: -30px 0 -10px 0;
+  letter-spacing: 0.5px;
+  opacity: 0.8;
+}
+
+.sign-box h2 {
+  font-size: 38px;
+  text-align: left;
+  color: #0d47a1;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.5px;
+}
+
+.sign-box h3 {
+  font-size: 14px;
+  text-align: left;
+  color: #202020;
+  margin: -20px 0 20px 0;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  opacity: 0.7;
+}
+
+.selector-container {
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+  margin-bottom: 28px;
+}
+
+.role-selector {
+  border: 2px solid #d1d5db;
+  border-radius: 16px;
+  font-size: 14px;
+  height: 120px;
+  width: 120px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  background-color: #fff;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  color: #111;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.role-selector:hover {
+  border-color: #a5a6cc;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.role-selector.selected {
+  border-color: #0d47a1;
+  background-color: #ffffff;
+  transform: scale(1.05);
+  box-shadow: 0 4px 16px rgba(13, 71, 161, 0.2);
+}
+
+.info-label {
+  display: flex;
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  color: #111;
+  font-family: "Poppins";
+  letter-spacing: 0.2px;
+}
+
+.info-inputs {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+}
+
+.form-category {
+  margin-bottom: 1rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.form-category:first-of-type {
+  border-top: none;
+  padding-top: 0;
+}
+
+.form-category-header {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #0d47a1;
+  text-transform: uppercase;
+  margin: 0 0 12px 0;
+}
+
+.info-inputs .input-container {
+  position: relative;
+  flex: 1;
+  margin-bottom: 10px;
+}
+/* When the email field is focused, bring its container to the front */
+.info-inputs .input-container:focus-within {
+  z-index: 2;
+}
+
+.info-inputs .input-icon {
+  position: absolute;
+  /* Position relative to the input field, not the container */
+  top: 18px;
+  left: 16px;
+  transform: none;
+  color: #444;
+  font-size: 16px;
+  pointer-events: none;
+  z-index: 1; /* Ensure icon is above the input background */
+}
+
+.password-toggle-icon {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  color: #6b7280;
+  cursor: pointer;
+  z-index: 2; /* Ensure it's above the input field */
+}
+.password-toggle-icon:hover {
+  color: #0d47a1;
+}
+
+.password-strength-container {
+  height: 6px;
+  width: 100%;
+  background-color: #e5e7eb;
+  border-radius: 3px;
+  margin-top: -5px; /* Position it closer to the password input */
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.strength-bar {
+  height: 100%;
+  background-color: var(--strength-color, #ef4444);
+  border-radius: 3px;
+  transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.strength-label {
+  font-size: 0.8rem;
+}
+
+.name-column {
+  display: flex;
+  flex-direction: row;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.last-name-group {
+  display: flex;
+  flex: 1;
+  gap: 0.75rem;
+}
+
+/* First name input and the last-name-group will share space */
+.name-column > input,
+.name-column > .last-name-group {
+  flex: 1; /* Allow first and last name to grow */
+}
+
+.middle-initial-input {
+  flex: 0 0 60px; /* Don't grow, don't shrink, base width of 60px */
+  text-align: center;
+}
+
+.info-inputs input {
+  width: 100%;
+  padding: 13px 16px 13px 44px;
+  border: 2px solid transparent;
+  box-sizing: border-box; /* Add this to include padding in the width calculation */
+  border-radius: 12px;
+  background: #ffffff;
+  font-size: var(--font-size-base);
+  font-family: "Poppins";
+  outline: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* New rule for inputs without an icon */
+.info-inputs input.no-icon {
+  padding: 13px 16px;
+}
+
+.info-inputs input::placeholder {
+  color: #999;
+  font-weight: 400;
+}
+
+.extra-info {
+  display: flex;
+  flex-direction: row;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.extra-info label {
+  display: none;
+}
+
+.extra-info input,
+.extra-info select {
+  flex: 1;
+  padding: 13px 16px 13px 44px;
+  border: 2px solid transparent;
+  box-sizing: border-box; /* And here as well */
+  border-radius: 12px;
+  background: #ffffff;
+  font-size: var(--font-size-base);
+  font-family: "Poppins";
+  outline: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.info-inputs select {
+  width: 100%;
+  padding: 13px 16px 13px 44px;
+  border: 2px solid transparent;
+  box-sizing: border-box; /* And finally here */
+  border-radius: 12px;
+  background: #ffffff;
+  font-size: var(--font-size-base);
+  height: 52px; /* Add this to ensure consistent height */
+  font-family: "Poppins";
+  outline: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-top: 0;
+  cursor: pointer;
+}
+
+/* Focus styles for all inputs and selects in the sign-in form */
+.info-inputs input:focus,
+.extra-info input:focus,
+.extra-info select:focus,
+.info-inputs select:focus {
+  background: #ffffff;
+  border: 2px solid #0d47a1;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(13, 71, 161, 0.15);
+}
+
+.terms-container {
+  display: flex;
+  font-size: var(--font-size-base);
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 20px 0;
+  color: #111;
+  font-family: "Poppins", sans-serif;
+}
+
+.terms-container input[type="checkbox"] {
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+  margin-top: -20px;
+  accent-color: #0d47a1;
+}
+
+.terms-container label {
+  cursor: pointer;
+  margin-top: -20px;
+  font-weight: 500;
+}
+
+.terms-container .terms-link {
+  font-weight: 700; /* Bolder */
+  color: var(--brand-primary, #0d47a1);
+  text-decoration: underline;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.terms-container .terms-link:hover {
+  color: #1d4ed8; /* Darker blue on hover */
+}
+
+.signin-btn {
+  margin-top: -5px;
+  align-self: center;
+  width: 100%;
+  padding: 15px;
+  background: #0d47a1;
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  box-shadow: 0 8px 20px rgba(13, 71, 161, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  letter-spacing: 0.3px;
+}
+
+.signin-btn:hover {
+  background: #24268a;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(13, 71, 161, 0.4);
+}
+
+.signin-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(13, 71, 161, 0.3);
+}
+
+.signin-btn:disabled {
+  background: #1d5299; /* Darker, less saturated blue */
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 0 4px 12px rgba(13, 71, 161, 0.2);
+}
+
+.signin-btn .spinner {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+  margin-right: 10px;
+}
+
+.signin-btn {
+  justify-content: center;
+  align-items: center;
+}
+
+.signup-text {
+  margin-top: 10px;
+  margin-bottom: 8px;
+  text-align: center;
+  font-size: var(--font-size-base);
+  font-family: "Poppins", sans-serif;
+  color: #111;
+  font-weight: 400;
+}
+
+.signup-text a {
+  color: #0d47a1;
+  font-weight: 600;
+  text-decoration: none;
+  margin-left: 5px;
+  transition: all 0.2s ease;
+}
+
+.signup-text a:hover {
+  color: #24268a;
+  text-decoration: underline;
+}
+
+/* Success Confirmation Styles */
+.success-confirmation {
+  text-align: center;
+  padding: 40px;
+}
+
+.success-confirmation h1 {
+  color: #22c55e;
+  margin-bottom: 10px;
+  font-family: "Poppins", sans-serif;
+}
+
+.success-icon {
+  width: 70px;
+  height: 70px;
+  margin-bottom: 20px;
+  animation: popIn 0.5s cubic-bezier(0.25, 0.25, 0.25, 1.25);
+}
+
+@keyframes popIn {
+  from {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.confirmation-text {
+  font-size: 1rem;
+  color: #202020;
+  line-height: 1.6;
+  margin-bottom: 30px;
+  font-family: "Poppins", sans-serif;
+}
+
+.confirmation-text strong {
+  color: #111;
+  font-weight: 600;
+}
+
+/* Error Styling */
+.error-input,
+.input-error {
+  border: 2px solid #e74c3c !important;
+  box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1) !important;
+}
+
+.notification {
+  color: #e74c3c;
+  text-align: center;
+  margin-top: 16px;
+  font-weight: 600;
+  padding: 12px;
+  background: rgba(231, 76, 60, 0.1);
+  border-radius: 8px;
+  font-size: 13px;
+  font-family: "Poppins", sans-serif;
+}
+
+.success-message {
+  color: #16a34a;
+  text-align: center;
+  margin-top: 16px;
+  font-weight: 600;
+  padding: 12px;
+  background: rgba(22, 163, 74, 0.1);
+  border-radius: 8px;
+  font-size: 13px;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .sign-content-wrapper {
+    flex-direction: column;
+    width: 90%;
+    height: 90vh;
+  }
+
+  .sign-promo {
+    display: none; /* Hide promo on small screens */
+  }
+
+  .sign-box {
+    flex-basis: 100%;
+    max-height: 90vh;
+    padding: 2.5rem 2rem;
+  }
+
+  .sign-box h2 {
+    font-size: 32px;
+  }
+
+  .role-selector {
+    height: 100px;
+    width: 100px;
+    font-size: 13px;
+  }
+
+  .name-column,
+  .extra-info {
+    flex-direction: column;
+  }
+}
+.email-check-notification {
+  font-size: 12px;
+  color: #0d47a1;
+  font-weight: 500;
+  margin: 4px 0 0 5px;
+  margin: 8px 0 -5px 5px; /* Add a small margin on top */
+  text-align: left;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media (max-width: 1024px) {
+  .sign-promo {
+    flex-basis: 40%;
+    padding: 2rem;
+  }
+}
+
+/* Animation Keyframes */
+@keyframes logo-fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes content-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* --- Responsive Design (to match login page) --- */
+@media (max-width: 768px) {
+  .sign-content-wrapper {
+    flex-direction: column;
+    justify-content: center;
+    background: none;
+    box-shadow: none;
+    backdrop-filter: none;
+  }
+
+  .sign-promo {
+    display: none; /* Hide promo section on smaller screens */
+  }
+
+  .sign-box {
+    width: 90%;
+    max-width: 500px; /* Sign up form is wider, so 500px is better */
+    padding: 2.5rem 2rem;
+    border-radius: 24px; /* Full rounded corners on mobile */
+    max-height: 85vh; /* Ensure it fits on screen */
+  }
+
+  .name-column,
+  .extra-info {
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,227 @@
+/* system-settings-modal.css */
+
+.system-settings-modal {
+  max-width: 1200px !important; /* Widen the modal further */
+}
+
+.system-settings-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--admin-border);
+  margin-bottom: 20px;
+}
+/* This CSS is in src/styles/system-settings-modal.css */
+
+/* This class is used for the form containing an input and a button */
+.add-item-form {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.add-item-form input {
+  flex-grow: 1;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border-secondary);
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  font-size: 14px;
+}
+
+.add-item-form button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  background-color: var(--admin-primary-blue);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.add-item-form button:hover {
+  background-color: #0056b3; /* A darker blue */
+}
+
+.system-settings-tabs button {
+  padding: 10px 20px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--admin-text-secondary);
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.location-manager.three-column {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.system-settings-tabs button:hover {
+  background-color: var(--admin-bg);
+}
+
+.system-settings-tabs button.active {
+  color: var(--admin-primary-blue);
+  border-bottom-color: var(--admin-primary-blue);
+}
+
+.system-settings-tab-content {
+  padding: 10px;
+}
+
+/* --- General Settings Tab --- */
+.general-settings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.location-manager {
+  grid-column: 1 / -1; /* Span full width */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Three equal columns */
+  gap: 30px;
+  background-color: var(--admin-bg);
+  padding: 20px;
+  border-radius: 8px;
+  justify-content: center; /* Center the grid items */
+}
+
+.placeholder-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--admin-text-secondary);
+  background-color: #fff;
+  border-radius: 8px;
+  height: 85%; /* Make the placeholder fill the column height */
+  padding: 20px; /* Add some internal padding */
+}
+
+.editable-list-section h4 {
+  font-size: 16px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid var(--admin-border);
+  padding-bottom: 8px;
+}
+
+.editable-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 15px 0;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.editable-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+.editable-list li:hover {
+  background-color: var(--admin-bg);
+}
+.editable-list li.selected {
+  background-color: #e0e7ff;
+  color: var(--admin-primary-blue);
+  font-weight: 600;
+}
+
+.editable-list li button {
+  background: none;
+  border: none;
+  color: var(--admin-red);
+  cursor: pointer;
+  opacity: 0.7;
+}
+.editable-list li button:hover {
+  opacity: 1;
+}
+
+.add-item-form {
+  display: flex;
+  gap: 10px;
+}
+
+.add-item-form input {
+  flex-grow: 1;
+  padding: 8px;
+  border: 1px solid var(--admin-border);
+  border-radius: 6px;
+}
+
+.add-item-form button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  background-color: var(--admin-primary-blue);
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* --- Content & Data Tab --- */
+.content-management-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.data-purge-section h4,
+.terms-editor-section h4 {
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+.purge-action {
+  background-color: var(--admin-bg);
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+.purge-action p {
+  margin: 0 0 10px 0;
+}
+.purge-btn {
+  background-color: var(--admin-red);
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.terms-editor-section textarea {
+  width: 100%;
+  min-height: 300px;
+  padding: 10px;
+  border: 1px solid var(--admin-border);
+  border-radius: 6px;
+  resize: vertical;
+  margin-bottom: 10px;
+}
+.save-terms-btn {
+  background-color: var(--admin-primary-blue);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}

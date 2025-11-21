@@ -1,0 +1,582 @@
+/* ======================================================== */
+/* RESIDENT REPORT MODAL STYLES (MODERNIZED VERSION) */
+/* ======================================================== */
+
+/* 1. OVERLAY STYLES */
+.report-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeInOverlay 0.35s ease forwards;
+}
+
+/* 🔹 Overlay fade-in */
+@keyframes fadeInOverlay {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(10px);
+  }
+}
+
+/* 2. CONTENT BOX STYLES */
+.report-modal-content {
+  background: var(--bg-primary);
+  padding: 22px;
+  border-radius: 16px;
+  width: 700px;
+  top: 25px;
+  height: 600px;
+  max-width: 80vw;
+  max-height: 85vh;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  animation: slideUpModal 0.4s ease forwards;
+}
+
+/* 🔹 Modal slide-up animation */
+@keyframes slideUpModal {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.report-modal-content .close-btn {
+  /* Ensure close button is above the submission overlay if needed */
+  z-index: 20;
+}
+
+/* --- Submission Loading Overlay --- */
+.submission-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  border-radius: 16px;
+  color: var(--text-primary);
+  text-align: center;
+  padding: 20px;
+  transition: opacity 0.3s ease;
+}
+
+[data-theme="dark"] .submission-overlay {
+  background: rgba(17, 24, 39, 0.85);
+}
+
+.submission-overlay p {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: 1rem;
+}
+
+.submission-overlay .spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid var(--border-primary);
+  border-top-color: var(--brand-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.submission-overlay .success-icon {
+  color: #22c55e; /* Green */
+  animation: popIn 0.4s cubic-bezier(0.25, 0.25, 0.25, 1.25);
+}
+
+.submission-overlay .error-icon {
+  color: #ef4444; /* Red */
+  animation: popIn 0.4s cubic-bezier(0.25, 0.25, 0.25, 1.25);
+}
+
+.submission-overlay .submit-report-btn {
+  margin-top: 1.5rem;
+  width: auto; /* Let the button size itself */
+  padding: 12px 24px;
+}
+
+.report-modal-content::-webkit-scrollbar {
+  display: none;
+}
+
+/* 3. HEADER */
+.report-modal-content .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.report-modal-content .modal-header h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--brand-primary);
+}
+
+/* 4. CLOSE BUTTON */
+.report-modal-content .close-btn {
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  border: none;
+  border-radius: 50%;
+  top: 30px;
+  right: 30px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+.report-modal-content .close-btn:hover {
+  background: #e5e7eb; /* A slightly darker gray for hover */
+  color: var(--text-primary);
+  transform: rotate(90deg);
+}
+
+/* 5. REPORT FORM */
+.report-form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  flex-grow: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-top: 1px;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.report-form::-webkit-scrollbar {
+  display: none;
+}
+
+/* Inputs / Textareas */
+.report-form select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 15px;
+  border: 1px solid var(--border-secondary);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.report-form textarea {
+  width: 96%;
+  padding: 12px;
+  border-radius: 8px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 15px;
+  border: 1px solid var(--border-secondary);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.report-form select:focus,
+.report-form textarea:focus {
+  outline: none;
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 0 2px var(--brand-primary);
+}
+
+.report-form textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* ======================================================== */
+/* 6. EVIDENCE BUTTONS - MODERNIZED */
+/* ======================================================== */
+.evidence-buttons {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+}
+
+.evidence-btn {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(135deg, var(--bg-tertiary), var(--bg-secondary));
+  color: var(--text-secondary);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.evidence-btn:hover {
+  background: linear-gradient(135deg, var(--brand-primary), #2563eb);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.3);
+}
+
+.evidence-btn.location-btn:disabled {
+  background: var(--bg-secondary);
+  color: var(--text-tertiary);
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.location-preview {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border-primary);
+}
+
+.location-preview img {
+  width: 100%;
+  display: block;
+  background-color: var(--bg-secondary); /* Fallback color */
+}
+
+.location-preview p {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  margin: 0; /* Remove default paragraph margin */
+}
+
+.location-preview.osm-preview iframe {
+  width: 100%;
+  height: 200px;
+  border: none;
+  border-radius: 8px;
+  pointer-events: none; /* Make the iframe non-interactive in the form */
+}
+
+.location-actions {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  gap: 8px;
+}
+
+.remove-location-btn,
+.refresh-location-btn {
+  background: rgba(239, 68, 68, 0.8);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.refresh-location-btn {
+  background: rgba(37, 99, 235, 0.8); /* Blue background */
+}
+
+.remove-location-btn:hover {
+  background: rgba(220, 38, 38, 1);
+}
+
+.refresh-location-btn:hover:not(:disabled) {
+  background: rgba(29, 78, 216, 1);
+}
+
+.refresh-location-btn:disabled {
+  background: rgba(107, 114, 128, 0.7);
+  cursor: not-allowed;
+}
+
+.refresh-location-btn .spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Hide input */
+input[type="file"] {
+  display: none;
+}
+
+/* ======================================================== */
+/* 7. IMAGE PREVIEW */
+/* ======================================================== */
+.image-preview-gallery {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 5px 0;
+  max-height: 120px;
+  flex-shrink: 0;
+}
+
+.image-preview {
+  position: relative; /* This is the key fix */
+  flex-shrink: 0; /* Prevents the container from shrinking */
+}
+
+.image-preview img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--border-primary);
+  transition: transform 0.3s ease;
+}
+
+.image-preview:hover img {
+  transform: scale(1.05);
+}
+
+/* Remove Button Animation */
+.remove-image-btn {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: white;
+  border: none;
+  padding: 3px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.image-preview:hover .remove-image-btn {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+/* ======================================================== */
+/* 8. CAMERA VIEW - MODERNIZED */
+/* ======================================================== */
+.camera-view {
+  position: fixed; /* Changed from absolute to fixed for full-screen overlay */
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 10; /* Ensure it's above the modal overlay */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: fadeInCamera 0.35s ease-in-out;
+}
+
+/* 🔹 Camera fade-in animation */
+@keyframes fadeInCamera {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.camera-view video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Changed from contain to cover the full screen */
+  transform: scaleX(-1); /* Inverts the camera feed horizontally */
+}
+
+/* ======================================================== */
+/* 9. SUBMIT BUTTON - MODERNIZED */
+/* ======================================================== */
+.submit-report-btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--brand-primary), #2563eb);
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.submit-report-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.35);
+}
+
+.submit-report-btn:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* ======================================================== */
+/* 10. CAMERA BUTTON DESIGN - MODERNIZED */
+/* ======================================================== */
+
+.camera-controls {
+  position: absolute;
+  bottom: 30px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}
+
+/* 🔹 Main Capture Button */
+.capture-btn {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, #ffffff 30%, #e5e7eb 100%);
+  border: 4px solid #f3f4f6;
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1),
+    0 0 20px rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  animation: capturePulse 2.5s infinite ease-in-out;
+}
+
+.capture-btn:hover {
+  transform: scale(1.08);
+  background: radial-gradient(circle at center, #f9fafb 40%, #d1d5db 100%);
+}
+
+/* 🔹 Retake Button */
+.retake-btn {
+  padding: 10px 22px;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #facc15, #eab308);
+  color: #111;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(234, 179, 8, 0.35);
+  transition: all 0.25s ease;
+}
+
+.retake-btn:hover {
+  background: linear-gradient(135deg, #eab308, #ca8a04);
+  transform: translateY(-2px);
+}
+
+/* 🔹 Close Camera Button */
+.close-camera-btn {
+  padding: 10px 22px;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.35);
+  transition: all 0.25s ease;
+}
+
+.close-camera-btn:hover {
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
+  transform: translateY(-2px);
+}
+
+/* 🔹 Subtle Capture Glow Animation */
+@keyframes capturePulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 20px rgba(255, 255, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ======================================================== */
+/* 11. VIEW REPORTS BUTTON */
+/* ======================================================== */
+
+.view-reports-btn {
+  margin-top: 10px;
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.view-reports-btn:hover {
+  background: linear-gradient(135deg, #059669, #047857);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(5, 150, 105, 0.35);
+}

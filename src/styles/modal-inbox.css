@@ -1,0 +1,259 @@
+.inbox-modal-overlay {
+    position: fixed;
+    top: 40px; /* Start overlay below the header */
+    /* Add animation for the overlay */
+    animation: fadeInOverlay 0.35s ease forwards;
+}
+
+/* Keyframes for overlay fade-in */
+@keyframes fadeInOverlay {
+    from { opacity: 0; backdrop-filter: blur(0px); }
+    to { opacity: 1; backdrop-filter: blur(8px); } /* Use the existing blur value */
+}
+
+.inbox-modal-overlay {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Slightly darker for better focus */
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.inbox-modal-content {
+    background: var(--bg-primary);
+    width: 700px;
+    max-width: 700px;
+    height: 80vh;
+    max-height: 700px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    /* Add animation for the modal content */
+    animation: slideUpModal 0.4s ease forwards;
+}
+
+/* Keyframes for modal content slide-up */
+@keyframes slideUpModal {
+    from { opacity: 0; transform: translateY(20px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.inbox-modal-content .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border-bottom: 1px solid var(--border-primary);
+}
+
+.inbox-modal-content .modal-header h2 {
+    font-size: 1.3rem;
+    margin-left: 20px;
+    margin-top: -10px;
+    font-weight: 700;
+    /* Removed specific margins, let flexbox handle alignment */
+    padding-bottom: 10px;
+    padding-top: 20px;
+    color: var(--brand-primary);
+}
+
+.inbox-modal-content .close-btn {
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    top: 32px;
+    /* Removed specific margins, let flexbox handle alignment */
+    display: flex;
+    margin-top: -8px;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.inbox-modal-content .close-btn:hover {
+    background: #e5e7eb;
+    color: var(--text-primary);
+    transform: rotate(90deg);
+}
+
+.inbox-body {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.message-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.message-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    background: var(--bg-secondary);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s, box-shadow 0.2s;
+    border-left: 4px solid transparent;
+}
+
+.message-item.deleting {
+    animation: fadeOut 0.5s ease-out forwards;
+}
+
+
+.message-item:hover {
+    background: var(--bg-tertiary);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.message-item.unread {
+    background: var(--bg-primary);
+    border-left-color: var(--brand-primary);
+    font-weight: 600;
+}
+
+.message-item.unread .message-title {
+    color: var(--text-primary);
+}
+
+.message-icon {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--brand-primary);
+    flex-shrink: 0;
+}
+
+.message-item.unread .message-icon {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(37, 99, 235, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
+}
+
+.message-summary {
+    flex-grow: 1;
+}
+
+.message-title {
+    font-size: 15px;
+    color: var(--text-secondary);
+}
+
+.message-subtitle {
+    display: block;
+    font-size: 13px;
+    color: var(--text-tertiary);
+    font-weight: 400;
+}
+
+.message-date {
+    font-size: 13px;
+    color: var(--text-tertiary);
+    font-weight: 500;
+}
+
+.message-delete-btn {
+    background: none;
+    border: none;
+    color: var(--text-tertiary);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s, background-color 0.2s, color 0.2s;
+    margin-left: 15px;
+}
+
+.message-item:hover .message-delete-btn {
+    opacity: 1;
+}
+
+.message-delete-btn:hover {
+    background-color: #fee2e2;
+    color: #ef4444;
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; transform: scaleY(1); max-height: 100px; }
+  to { opacity: 0; transform: scaleY(0.8); max-height: 0; padding-top: 0; padding-bottom: 0; margin-bottom: 0; }
+}
+/* Certificate View */
+.certificate-paper {
+    border: 1px solid var(--border-primary);
+    padding: 30px;
+    margin-top: 15px;
+    background: var(--bg-primary);
+    font-family: 'Times New Roman', Times, serif;
+    color: #000;
+}
+
+.cert-header, .cert-footer {
+    text-align: center;
+}
+
+.cert-header h1 { font-size: 24px; margin: 20px 0; text-transform: uppercase; }
+.cert-header h3, .cert-header h4, .cert-header h5 { margin: 0; }
+
+.cert-body {
+    margin: 40px 0;
+    text-align: justify;
+    line-height: 1.8;
+}
+
+.cert-body p {
+    text-indent: 40px;
+    margin-bottom: 20px;
+}
+
+.cert-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 60px;
+}
+
+.signature-line {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 250px;
+    border-top: 1px solid #000;
+    padding-top: 5px;
+}
+
+.signature-line span {
+    font-size: 12px;
+    color: #555;
+}
+
+.details-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px 0 0 0;
+}
+
+.print-btn {
+    background: var(--brand-primary);
+    color: white;
+}

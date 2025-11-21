@@ -1,0 +1,828 @@
+/* Overlay and Modal Content (consistent with other modals) */
+.view-reports-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeInOverlay 0.35s ease forwards;
+}
+
+.view-reports-modal-content {
+  background: var(--bg-primary);
+  border-radius: 16px;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-bottom: 20px;
+  padding-top: 20px;
+  margin-top: 60px;
+  width: 780px;
+  height: 600px; /* Fixed height */
+  max-width: 90vw;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  animation: slideUpModal 0.4s ease forwards;
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes fadeInOverlay {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(10px);
+  }
+}
+
+@keyframes slideUpModal {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Header and Close Button (UNCHANGED per request) */
+.view-reports-modal-content .modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* --- IMPROVEMENT: Better separation from content --- */
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.view-reports-modal-content .modal-header h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--brand-primary);
+  text-align: left;
+  margin-top: -10px;
+  margin-bottom: 9px;
+  flex-grow: 1;
+}
+
+.view-reports-modal-content .close-btn {
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  border: none;
+  top: 25px;
+  right: 30px;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+.view-reports-modal-content .close-btn:hover {
+  background: #e5e7eb;
+  color: var(--text-primary);
+  transform: rotate(90deg);
+}
+
+/* Modal Body and Report Cards */
+.reports-body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  /* Scrolling is now handled by the tab content */
+  gap: 1rem; /* Add space between report cards */
+  overflow-y: auto; /* Ensure scrolling is enabled */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* --- NEW: Custom Scrollbar Styling for Polish --- */
+.reports-body::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
+}
+/* ----------------------------------------------- */
+
+.report-card {
+  background-color: var(--bg-secondary);
+  border-radius: 0.5rem;
+  border: 1px solid var(--border-primary);
+  /* --- IMPROVEMENT: Compact vertical padding for more items --- */
+  padding: 10px 30px;
+  margin-left: 2px;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.report-card h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 0.5rem 0;
+}
+
+.report-card-description {
+  color: var(--text-secondary);
+  margin: 0;
+  font-size: 0.95rem; /* Slight size increase for readability */
+  /* --- FIX: Ensure long text without spaces wraps correctly --- */
+  word-break: break-word;
+}
+
+.report-card.clickable {
+  cursor: pointer;
+  position: relative;
+}
+
+.report-card.clickable:hover {
+  transform: translateY(-2px);
+  /* --- IMPROVEMENT: Adding a primary color ring for clear focus/interactivity --- */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08), 0 0 0 1px var(--brand-primary);
+}
+
+.report-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem; /* Added margin below header */
+}
+
+/* --- IMPROVEMENT: View icon uses brand color for better intention/visibility --- */
+.view-icon {
+  color: var(--brand-primary);
+}
+
+/* --- NEW: Card Footer for metadata, requires a simple div in HTML --- */
+.report-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px dashed var(--border-secondary);
+}
+
+.report-card-details {
+  display: flex;
+  gap: 1.2rem;
+  font-size: 0.9rem;
+}
+
+.report-card-details span {
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 4px; /* Space between icon/label */
+}
+/* ------------------------------------------------------------------- */
+
+.no-reports-placeholder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: var(--text-secondary);
+  text-align: center;
+  padding: 2rem;
+  gap: 1rem;
+}
+
+/* ======================================================== */
+/* REPORT DETAILS SUBMODAL */
+/* ======================================================== */
+.report-details-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeInOverlay 0.3s ease forwards;
+  z-index: 1100;
+  margin-top: 50px;
+}
+
+.report-details-content {
+  background: var(--bg-primary);
+  border-radius: 14px;
+  /* --- IMPROVEMENT: Slightly narrower for better focus --- */
+  width: 800px;
+  max-width: 90vw;
+  /* --- IMPROVEMENT: Consistent padding --- */
+  padding-top: 15px;
+  padding-bottom: 24px;
+  padding-left: 24px;
+  padding-right: 24px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+  animation: slideUpModal 0.3s ease forwards;
+  /* --- NEW: Constrain height and enable flex layout --- */
+  display: flex;
+  flex-direction: column;
+  max-height: 83vh;
+}
+
+.details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  border-bottom: 1px solid var(--border-primary);
+  padding-bottom: 8px;
+}
+
+.details-header h3 {
+  font-size: 1.25rem;
+  color: var(--brand-primary);
+}
+
+/* --- NEW: Status Indicator for Details Submodal --- */
+.detail-status-indicator {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.detail-status-indicator .status-label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-right: 12px;
+  font-weight: 500;
+}
+/* ---------------------------------------------------- */
+
+/* --- NEW: Media Gallery in Details View --- */
+.report-media-gallery {
+  margin-top: 1.5rem;
+}
+
+.report-media-gallery strong {
+  display: block;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+}
+
+.media-items {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.media-items img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--border-secondary);
+  cursor: pointer;
+}
+
+.report-location-view {
+  margin-top: 10px;
+}
+
+.location-address-text {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+/* --- NEW: Button style for the map link --- */
+.view-on-map-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: var(--brand-primary);
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.view-on-map-btn:hover {
+  background: #1d4ed8; /* Darker blue on hover */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.details-body {
+  /* --- NEW: Make this section scrollable --- */
+  overflow-y: auto;
+  padding-right: 10px; /* Space for scrollbar */
+  flex-grow: 1; /* Allow this section to fill available space */
+  padding-bottom: 15px;
+}
+
+.details-body p {
+  /* --- IMPROVEMENT: Better vertical margin and line height for readability --- */
+  margin: 12px 0;
+  line-height: 1.6;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  /* --- FIX: Ensure long text without spaces wraps correctly --- */
+  word-break: break-word;
+}
+
+/* --- NEW: Tab Styles (reused from m-review-certs.css) --- */
+.certs-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border-primary);
+  margin-bottom: 1rem;
+  flex-shrink: 0; /* Prevent tabs from shrinking */
+}
+
+.tab-btn {
+  padding: 10px 20px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: var(--text-secondary);
+  font-weight: 600;
+  transition: all 0.2s ease;
+  margin-bottom: -1px; /* Overlap the container's border */
+}
+
+.tab-btn.active {
+  color: var(--brand-primary);
+  border-bottom-color: var(--brand-primary);
+}
+
+.tab-btn:hover:not(.active) {
+  color: var(--text-primary);
+  background-color: var(--bg-secondary);
+}
+
+.certs-tab-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  overflow-y: auto;
+  flex-grow: 1;
+  padding: 0.5rem 10px 0.5rem 0;
+  padding: 0.5rem 10px;
+}
+
+.empty-category-message {
+  color: var(--text-tertiary);
+  font-style: italic;
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+/* --- NEW: Filter Bar Styles --- */
+.filter-bar {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-primary);
+  flex-shrink: 0;
+}
+
+.filter-search {
+  flex-grow: 1;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border-secondary);
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  font-size: 14px;
+}
+
+.filter-select {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border-secondary);
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* Cancel Button */
+.cancel-report-btn {
+  margin-top: 15px;
+  width: 100%;
+  padding: 12px;
+  border: none;
+  /* --- IMPROVEMENT: Slightly smaller radius for a modern look --- */
+  border-radius: 8px;
+  font-weight: 600;
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: white;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  /* --- IMPROVEMENT: Softer initial shadow --- */
+  box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.cancel-report-btn:hover {
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(239, 68, 68, 0.35);
+}
+
+/* --- NEW: Delete button for resolved/declined reports --- */
+.delete-report-btn {
+  margin-top: 15px;
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border-secondary);
+  border-radius: 8px;
+  font-weight: 600;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.delete-report-btn:hover {
+  background: var(--bg-tertiary);
+  color: #ef4444; /* Red text on hover for delete intention */
+  border-color: #ef4444;
+}
+
+/* ======================================================== */
+/* PROGRESS TRACKER (Looks good, minor consistency checks) */
+/* ======================================================== */
+.progress-tracker {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 25px 0;
+  padding: 10px, 10px;
+  position: relative;
+}
+
+/* Each step */
+.progress-step {
+  flex: 1;
+  text-align: center;
+  /* Add display flex to align items vertically */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.progress-step .icon-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.current-status-text {
+  /* These !important rules are no longer needed with the structural fix */
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* The icon itself */
+.progress-step .icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 2px solid var(--border-primary);
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 8px;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+}
+
+/* Connecting line */
+.progress-step::after {
+  content: "";
+  position: absolute;
+  top: 23px;
+  right: -50%;
+  width: 100%;
+  height: 4px;
+  background: var(--border-primary);
+  z-index: -1;
+  transition: background 0.3s ease;
+}
+
+.progress-step:last-child::after {
+  display: none;
+}
+
+/* Label text */
+.progress-step p {
+  font-size: 0.85rem;
+  margin: 0;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* ===== Active States ===== */
+
+/* Active (completed or current) */
+.progress-step.active .icon {
+  background: var(--brand-primary);
+  color: #fff;
+  border-color: var(--brand-primary);
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+}
+
+.progress-step.active p {
+  color: var(--text-primary);
+}
+
+/* Connector color when active */
+.progress-step.active::after {
+  background: linear-gradient(
+    to right,
+    var(--brand-primary),
+    var(--border-primary)
+  );
+}
+
+/* Declined step */
+.progress-step.declined .icon {
+  background: #fee2e2;
+  color: #b91c1c;
+  border-color: #fecaca;
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.3);
+}
+
+.progress-step.declined p {
+  color: #b91c1c;
+}
+
+.progress-step.declined::after {
+  background: #fecaca;
+}
+
+/* ======================================================== */
+/* STATUS BADGES (for list cards) */
+/* ======================================================== */
+.status-badge {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  color: white;
+}
+
+/* Status Colors (Improved contrast and impact) */
+.status-submitted {
+  /* --- IMPROVEMENT: Better contrast for yellow badge text --- */
+  background: #facc15;
+  color: #374151; /* Darker gray for better contrast */
+}
+
+.status-reviewed {
+  background: #f97316; /* orange */
+}
+
+.status-approved {
+  background: #22c55e; /* green */
+}
+
+.status-declined {
+  /* --- IMPROVEMENT: Slightly brighter red for impact --- */
+  background: #f87171;
+  color: white;
+}
+
+.status-in-progress {
+  background: #3b82f6; /* blue */
+}
+
+.status-done {
+  background: #16a34a; /* darker green */
+}
+
+.status-canceled {
+  background: #6b7280; /* medium gray */
+  color: #f9fafb; /* light gray text */
+  border: 1px solid #4b5563;
+}
+
+.status-default {
+  background: #6b7280; /* gray fallback */
+}
+
+/* ======================================================== */
+/* IMAGE PREVIEW MODAL (for report details) */
+/* ======================================================== */
+.preview-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Higher than the details submodal */
+  animation: fadeInOverlay 0.3s ease;
+}
+
+.preview-modal-content {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 90vw;
+  max-height: 90vh;
+}
+
+.modal-image {
+  width: 100%; /* This ensures the image takes up the container's width */
+  max-width: 100%;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+.preview-close-btn {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  background: transparent;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  transition: transform 0.2s;
+}
+
+.preview-close-btn:hover {
+  transform: scale(1.2);
+}
+
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.2s;
+}
+.nav-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+.prev-btn {
+  left: -70px;
+}
+.next-btn {
+  right: -70px;
+}
+
+.image-counter {
+  position: absolute;
+  bottom: -30px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+}
+
+.delete-report-btn.moderator-delete {
+  margin-top: 10px;
+  width: auto; /* Don't force full width */
+}
+
+/* ======================================================== */
+/* MODERATOR ACTIONS (for m-review-report.jsx) */
+/* ======================================================== */
+.back-to-list-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  color: var(--brand-primary);
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+}
+
+.moderator-actions {
+  margin-top: 2rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--border-primary);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.primary-actions,
+.secondary-actions {
+  display: flex;
+  flex: 1 1 100%; /* Allow groups to take full width and wrap */
+  gap: 12px;
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.action-btn.approve {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+}
+.action-btn.decline {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+.secondary-actions .action-btn {
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-primary);
+  box-shadow: none;
+}
+
+.secondary-actions .action-btn:hover:not(:disabled) {
+  background: var(--bg-tertiary);
+  border-color: var(--border-secondary);
+}
+
+.action-btn.progress {
+  background: linear-gradient(135deg, #3b82f6, #2563eb); /* Blue gradient */
+  color: white;
+}
+
+.action-btn.resolve {
+  background: linear-gradient(135deg, #22c55e, #16a34a); /* Green gradient */
+  color: white;
+}
+
+.secondary-actions .action-btn.progress:hover:not(:disabled) {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: white; /* Ensure text stays white on hover */
+}
+
+.secondary-actions .action-btn.resolve:hover:not(:disabled) {
+  background: linear-gradient(135deg, #16a34a, #15803d);
+}
+
+.action-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+.action-btn:disabled {
+  background: var(--bg-secondary);
+  color: var(--text-tertiary);
+  cursor: not-allowed;
+  transform: none;
+  filter: none;
+  box-shadow: none;
+  opacity: 0.7;
+}

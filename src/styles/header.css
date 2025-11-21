@@ -1,0 +1,222 @@
+/* * Stylesheet for the Header Component (Top Bar)
+ * Designed for a clean, modern, and responsive layout.
+ */
+
+:root {
+  --primary-color: #0d47a1; /* Deep blue, suitable for governance/community */
+  --secondary-color: #fdd835; /* Yellow/Gold for accent */
+  --text-color: #333;
+  --light-text-color: #fff;
+  --background-light: #f5f5f5;
+  --spacing-md: 6px;
+  --spacing-lg: 2rem;
+}
+
+.top-bar.blurred {
+  filter: blur(5px) brightness(0.7);
+  transition: filter 0.3s ease-out;
+  pointer-events: none; /* Prevent interaction with the blurred header */
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  margin: 0;
+  position: sticky;
+}
+/* --- NEW: Modern Dropdown Menu Styles --- */
+
+/* The dropdown container */
+.header-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 10px); /* Position below the avatar with a gap */
+  right: 0;
+  background-color: var(--bg-primary);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  border: 1px solid var(--border-primary);
+  width: 180px;
+  padding: 8px;
+  z-index: 100;
+  overflow: hidden;
+  animation: slideDownFadeIn 0.2s ease-out;
+}
+
+/* Keyframes for the animation */
+@keyframes slideDownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Base style for buttons inside the dropdown */
+.header-dropdown-menu button {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* Space between icon and text */
+  width: 100%;
+  padding: 12px 16px;
+  background: none;
+  border: none;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.header-dropdown-menu button:hover {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+.header-dropdown-menu .logout-btn:hover {
+  background-color: #fee2e2; /* Light red background on hover */
+  color: #dc2626; /* Dark red text on hover */
+}
+/* --- 1. Main Header Container (Top Bar) --- */
+.top-bar {
+  display: flex;
+  justify-content: space-between; /* Space out logo and user info */
+  align-items: center;
+  padding: var(--spacing-md) var(--spacing-lg);
+  background-color: var(--primary-color);
+  color: var(--light-text-color);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -2px rgba(0, 0, 0, 0.06);
+  position: sticky; /* Keep header visible at the top */
+  top: 0;
+  z-index: 1000;
+  min-height: 10px; /* Ensure a good height */
+}
+
+/* --- 2. Logo Section --- */
+.logo {
+  display: flex;
+  align-items: center; /* Vertically center the icon and text */
+  font-size: 1.5rem; /* Larger font for emphasis */
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  gap: 0.75rem; /* Space between icon and text */
+}
+
+.logo-icon {
+  width: 35px;
+  height: 35px;
+  object-fit: cover;
+  border-radius: 0.5rem; /* Slightly rounded corners for the logo image */
+  background-color: var(--light-text-color); /* Fallback/background for logo */
+  padding: 2px; /* Small border effect */
+}
+
+.logo-link {
+  text-decoration: none;
+  color: inherit;
+  display: inline-flex;
+}
+
+/* --- 3. User Information Section --- */
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* Space between username and avatar */
+  position: relative; /* Needed for dropdown positioning */
+  cursor: pointer;
+  transition: opacity 0.2s;
+  border-radius: 0.5rem;
+}
+
+.user-info:hover {
+  opacity: 0.9;
+}
+
+.username {
+  font-size: 1rem;
+  font-weight: 500;
+  /* Hide username on small screens for better space management */
+  display: none;
+}
+
+/* --- 4. Avatar (User Image) --- */
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; /* Perfect circle for avatar */
+  object-fit: cover;
+  border: 3px solid var(--secondary-color); /* Highlight avatar with accent color */
+}
+
+/* --- 5. Header Dropdown Menu --- */
+.header-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 10px); /* Position below the header with a small gap */
+  right: 0;
+  background-color: var(--bg-primary, #fff);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--border-primary, #e5e7eb);
+  width: 160px;
+  z-index: 1100;
+  overflow: hidden;
+  animation: slideDownMenu 0.2s ease-out;
+}
+
+@keyframes slideDownMenu {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.header-dropdown-menu button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 12px 16px;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary, #111827);
+}
+
+.header-dropdown-menu button:hover {
+  background-color: var(--bg-secondary, #f3f4f6);
+}
+
+.header-dropdown-menu button.logout-btn {
+  color: #ef4444; /* Red color for logout */
+}
+
+.header-dropdown-menu button.logout-btn:hover {
+  background-color: #fee2e2; /* Light red background on hover */
+}
+
+/* --- 5. Responsiveness for small screens (Mobile) --- */
+@media (min-width: 640px) {
+  .username {
+    display: block; /* Show username on wider screens */
+  }
+}
+
+/* Since updates-title is empty in the current component, we keep its styling minimal */
+.updates-title {
+  /* Optionally center content if needed */
+  flex-grow: 1;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 600;
+}

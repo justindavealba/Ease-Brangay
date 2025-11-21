@@ -1,0 +1,166 @@
+/* Reusing styles from modal-notification.css for consistency */
+.audit-log-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(12px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1010; /* Higher than settings modal */
+    animation: fadeInOverlay 0.3s ease forwards;
+}
+
+.audit-log-modal-content {
+    background: var(--bg-primary);
+    border-radius: 16px;
+    padding: 20px 24px;
+    width: 600px;
+    height: 600px;
+    max-width: 90vw;
+    max-height: 85vh;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    animation: slideUpModal 0.35s ease forwards;
+}
+
+.audit-log-modal-content .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-primary);
+}
+
+.audit-log-modal-content .modal-header h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--brand-primary);
+}
+
+.audit-log-modal-content .close-btn {
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.audit-log-modal-content .close-btn:hover {
+    background: #e5e7eb;
+    color: var(--text-primary);
+    transform: rotate(90deg);
+}
+
+.audit-log-body {
+    flex-grow: 1;
+    overflow-y: auto;
+    margin-top: 1rem;
+    padding-right: 10px;
+}
+
+.audit-log-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.audit-log-item {
+    padding: 12px;
+    border-radius: 8px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-primary);
+}
+
+.log-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.log-action {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.log-timestamp {
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+}
+
+.log-meta {
+    margin-bottom: 8px;
+}
+
+.log-user {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+.log-details {
+    margin-top: 8px;
+    padding-left: 12px;
+    border-left: 2px solid var(--border-primary);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.log-detail-item {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    word-break: break-all;
+}
+
+.log-detail-item span {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.no-logs-placeholder {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    color: var(--text-secondary);
+    text-align: center;
+    padding: 2rem;
+    gap: 1rem;
+}
+
+.audit-log-modal-content .modal-footer {
+    padding-top: 1rem;
+    margin-top: 1rem;
+    border-top: 1px solid var(--border-primary);
+    display: flex;
+    justify-content: flex-end;
+}
+
+.audit-log-modal-content .clear-all-btn {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: white;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.audit-log-modal-content .clear-all-btn:hover {
+    background: linear-gradient(135deg, #dc2626, #b91c1c);
+    transform: translateY(-1px);
+}

@@ -1,0 +1,94 @@
+.report-user-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1050;
+    animation: fadeInOverlay 0.3s ease;
+}
+
+.report-user-modal-content {
+    background: var(--bg-primary);
+    padding: 25px;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 550px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    animation: slideUpModal 0.4s ease;
+}
+
+.report-user-modal-content .modal-header h2 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #ef4444; /* Red for warning */
+}
+
+.report-user-modal-content p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.report-user-modal-content .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.report-user-modal-content label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+}
+
+.report-user-modal-content textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border-primary);
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    font-size: 1rem;
+    resize: vertical;
+}
+
+.report-user-modal-content .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 1rem;
+}
+
+.report-user-modal-content .cancel-btn {
+    padding: 10px 20px;
+    border-radius: 8px;
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-primary);
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.report-user-modal-content .submit-btn {
+    padding: 10px 20px;
+    border-radius: 8px;
+    background: #ef4444;
+    color: white;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.report-user-modal-content .submit-btn:hover {
+    background: #dc2626;
+}
+
+.report-user-modal-content .submit-btn:disabled {
+    background: #fca5a5;
+    cursor: not-allowed;
+}

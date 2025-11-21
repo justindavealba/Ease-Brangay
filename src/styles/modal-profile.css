@@ -1,0 +1,281 @@
+.profile-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Align to top */
+  z-index: 1000;
+  animation: fadeInOverlay 0.35s ease forwards;
+  padding-top: 60px; /* Add padding to avoid header */
+}
+
+/* ======================================================== */
+/* FONT SIZE VARIABLES */
+/* ======================================================== */
+[data-font-size="small"] {
+  --font-size-base: 13px;
+  --font-size-lg: 15px;
+  --font-size-xl: 17px;
+}
+[data-font-size="medium"] {
+  --font-size-base: 14px;
+  --font-size-lg: 16px;
+  --font-size-xl: 18px;
+}
+[data-font-size="large"] {
+  --font-size-base: 15px;
+  --font-size-lg: 17px;
+  --font-size-xl: 19px;
+}
+
+@keyframes fadeInOverlay {
+  from {
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+  to {
+    opacity: 1;
+    backdrop-filter: blur(10px);
+  }
+}
+
+.profile-modal-content {
+  background: var(--bg-primary);
+  border-radius: 16px;
+  padding: 10px 26px;
+  margin-top: 15px;
+  margin-bottom: 25px;
+  width: 430px;
+  max-width: 90vw;
+  height: 600px; /* You can adjust this value */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  animation: slideUpModal 0.4s ease forwards;
+  max-height: calc(100vh - 100px); /* Ensure it fits vertically */
+  overflow-y: auto; /* Add scroll if content is too tall */
+}
+
+@keyframes slideUpModal {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ---------- HEADER ---------- */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.modal-header h2 {
+  font-size: 1.25rem;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  font-weight: 700;
+  color: var(--brand-primary);
+}
+
+.modal-header .close-btn {
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  top: 20px;
+  right: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease;
+  /* Remove position properties that aren't needed in flex layout */
+}
+
+.modal-header .close-btn:hover {
+  background: #e5e7eb;
+  color: var(--text-primary);
+  transform: rotate(90deg);
+}
+
+/* ---------- AVATAR UPLOAD ---------- */
+.avatar-container {
+  position: relative;
+  cursor: pointer;
+  border-radius: 50%;
+  margin-top: -10px;
+  display: inline-block; /* To fit the image size */
+}
+
+.avatar-edit-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  cursor: default; /* Change cursor for the overlay itself */
+}
+
+.avatar-loading-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.avatar-loading-overlay .spinner {
+  width: 30px;
+  height: 30px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.avatar-container:hover .avatar-edit-overlay {
+  opacity: 1;
+}
+
+.overlay-action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+}
+
+.avatar-actions {
+  display: flex;
+  justify-content: center; /* Center the remaining button */
+}
+
+.avatar-action-btn {
+  background: none;
+  border: none;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+.avatar-action-btn.remove {
+  color: #ef4444;
+}
+
+.avatar-action-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.avatar-action-btn:hover {
+  background-color: var(--bg-tertiary);
+}
+
+/* ---------- PROFILE DETAILS (Improved Avatar Section) ---------- */
+.profile-details {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0;
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.profile-avatar-large {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--bg-primary);
+  box-shadow: 0 0 0 3px var(--brand-primary), 0 5px 15px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  transition: all 0.3s ease;
+}
+
+.profile-details h3 {
+  margin: 10px 0 5px;
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.profile-details .username {
+  color: var(--text-secondary);
+  font-size: var(--font-size-base);
+  margin: 0;
+}
+
+/* ---------- INFO GRID ---------- */
+.profile-info-grid {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.label {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.value {
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+/* ---------- LOGOUT BUTTON ---------- */
+.logout-btn {
+  margin-top: 20px;
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  background: #ef4444;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.logout-btn:hover {
+  background: #dc2626;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(239, 68, 68, 0.25);
+}

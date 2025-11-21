@@ -1,0 +1,779 @@
+/* user-management-modal.css - Modern Redesign */
+.admin-modal-header h2 {
+  font-size: 1.3rem;
+  color: var(--admin-primary-blue);
+}
+
+.user-management-modal {
+  max-width: 1100px !important;
+}
+
+.user-management-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--admin-border);
+  margin-bottom: 24px;
+  gap: 4px;
+}
+
+.user-management-tabs button {
+  padding: 14px 24px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--admin-text-secondary);
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 8px 8px 0 0;
+  position: relative;
+}
+
+.user-management-tabs button:not(.active) {
+  opacity: 0.7;
+}
+
+.user-management-tabs button:hover {
+  background-color: var(--admin-bg);
+  opacity: 1;
+}
+
+.user-management-tabs button.active {
+  color: var(--admin-primary-blue);
+  background-color: transparent;
+  opacity: 1;
+}
+
+.user-management-tab-content {
+  padding: 24px 12px;
+}
+
+/* User List Tab */
+.user-search-bar {
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.user-search-bar svg {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--admin-text-secondary);
+}
+
+.user-search-bar input {
+  width: 100%;
+  padding: 14px 20px 14px 50px;
+  border-radius: 14px;
+  border: 2px solid transparent;
+  background-color: var(--admin-bg);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.user-search-bar input:focus {
+  outline: none;
+  border-color: var(--admin-primary-blue);
+  background-color: white;
+  box-shadow: 0 0 0 4px rgba(24, 119, 242, 0.1);
+}
+
+.user-search-bar input::placeholder {
+  color: var(--admin-text-secondary);
+}
+
+.user-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid var(--admin-border);
+}
+
+.user-table th,
+.user-table td {
+  padding: 16px 20px;
+  text-align: left;
+  border-bottom: 1px solid var(--admin-border);
+}
+
+.user-table th {
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+  font-weight: 700;
+  color: var(--admin-text-secondary);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.user-table td {
+  font-size: 14px;
+  background-color: white;
+  font-weight: 500;
+}
+
+.user-table tbody tr {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.user-table tbody tr:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(24, 119, 242, 0.05),
+    rgba(111, 66, 193, 0.05)
+  );
+  transform: scale(1.005);
+}
+
+.user-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.user-table .status-badge {
+  padding: 4px 10px;
+  border-radius: 14px;
+  font-size: 11px;
+  font-weight: 700;
+  color: white;
+  margin-right: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.user-table .status-active {
+  background: linear-gradient(135deg, var(--admin-green), #059669);
+}
+
+.user-table .status-suspended {
+  background: linear-gradient(135deg, var(--admin-red), #dc2626);
+}
+
+.user-table .status-unverified {
+  background: linear-gradient(135deg, #fee2e2, #fca5a5);
+  color: #b91c1c;
+}
+.user-table .status-verified {
+  background: linear-gradient(135deg, var(--admin-primary-blue), #0c63d4);
+}
+
+.user-actions button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin: 0 6px;
+  padding: 8px;
+  border-radius: 10px;
+  color: var(--admin-text-secondary);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.user-actions button:hover {
+  background-color: var(--admin-bg);
+  color: var(--admin-text-primary);
+  transform: scale(1.1);
+}
+
+.user-actions .action-suspend:hover {
+  color: var(--admin-red);
+  background-color: rgba(250, 56, 62, 0.1);
+}
+
+.user-actions .action-activate:hover {
+  color: var(--admin-green);
+  background-color: rgba(66, 183, 42, 0.1);
+}
+
+.user-actions .action-demote:hover {
+  color: var(--admin-yellow);
+  background-color: rgba(245, 195, 59, 0.1);
+}
+
+/* Loading State for User Action Buttons */
+.user-actions button.loading {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.user-actions button.loading::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 2px solid transparent;
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+.user-actions button.loading svg {
+  opacity: 0;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Create Moderator Tab */
+.create-moderator-container {
+  max-width: 550px;
+  margin: 0 auto;
+  padding: 32px;
+  text-align: center;
+  background: linear-gradient(135deg, #ffffff 0%, #fafbfc 100%);
+  border-radius: 16px;
+  border: 1px solid var(--admin-border);
+}
+
+.create-moderator-container h3 {
+  margin-bottom: 8px;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--admin-text-primary);
+}
+
+.create-moderator-container p {
+  color: var(--admin-text-secondary);
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+
+.create-moderator-form .form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.create-moderator-form label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--admin-text-primary);
+  font-size: 14px;
+}
+
+.create-moderator-form input,
+.create-moderator-form select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid var(--admin-border);
+  border-radius: 10px;
+  font-size: 14px;
+  background-color: white;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 500;
+}
+
+.create-moderator-form select:disabled {
+  background-color: var(--admin-bg);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.create-moderator-form input:focus,
+.create-moderator-form select:focus {
+  outline: none;
+  border-color: var(--admin-primary-blue);
+  background-color: white;
+  box-shadow: 0 0 0 4px rgba(24, 119, 242, 0.1);
+}
+
+.create-moderator-form .submit-btn {
+  width: 100%;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--admin-primary-blue), #0c63d4);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  font-size: 16px;
+  margin-top: 8px;
+}
+
+.create-moderator-form .submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(24, 119, 242, 0.3);
+}
+
+.create-moderator-form .submit-btn:active {
+  transform: translateY(0);
+}
+
+/* Loading State for Submit Button */
+.create-moderator-form .submit-btn.loading {
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.create-moderator-form .submit-btn.loading::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Dispute Resolution Tab */
+.dispute-resolution-container h3 {
+  margin-bottom: 8px;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.dispute-resolution-container p {
+  color: var(--admin-text-secondary);
+  margin-bottom: 28px;
+  line-height: 1.6;
+}
+
+.dispute-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.dispute-card {
+  background: linear-gradient(135deg, #ffffff 0%, #fafbfc 100%);
+  border: 1px solid transparent;
+  border-radius: 14px;
+  padding: 20px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+
+  cursor: pointer;
+}
+
+.dispute-card.unread {
+  border-left: 4px solid var(--admin-primary-blue);
+  background: linear-gradient(135deg, #f0f5ff 0%, #fafbfc 100%);
+}
+
+.dispute-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(180deg, var(--admin-red), var(--admin-yellow));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.dispute-card:hover {
+  border-color: var(--admin-border);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.dispute-card:hover::before {
+  opacity: 1;
+}
+
+.dispute-info-row {
+  display: grid; /* Use grid for better alignment */
+  grid-template-columns: 70px 1fr; /* Fixed label width */
+  align-items: start;
+  gap: 12px;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.info-label {
+  font-weight: 600;
+  color: var(--admin-text-secondary);
+}
+
+.info-value {
+  font-weight: 500;
+  color: var(--admin-text-primary);
+}
+
+.status-tag {
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: capitalize;
+  background-color: var(--admin-bg);
+  border: 1px solid var(--admin-border);
+}
+
+.message-label {
+  display: block;
+  font-weight: 600;
+  color: var(--admin-text-secondary);
+  font-size: 14px;
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+
+.dispute-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--admin-text-secondary);
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.dispute-body p {
+  margin: 6px 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.dispute-body blockquote {
+  margin: 12px 0 12px 20px;
+  padding-left: 16px;
+  border-left: 4px solid var(--admin-border);
+  font-style: italic;
+  color: var(--admin-text-secondary);
+  background-color: var(--admin-bg);
+  padding: 12px 12px 12px 16px;
+  border-radius: 0 8px 8px 0;
+}
+
+.dispute-actions {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--admin-border);
+  display: flex;
+  gap: 10px;
+}
+
+.dispute-actions .action-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 13px;
+  position: relative;
+}
+
+.dispute-actions .action-btn:hover {
+  transform: translateY(-2px);
+}
+
+.dispute-actions .action-btn.suspend {
+  background: linear-gradient(135deg, #fff1f2, #ffe4e6);
+  color: #c81e1e;
+}
+
+.dispute-actions .action-btn.suspend:hover {
+  background: linear-gradient(135deg, #fee2e2, #fecaca);
+  box-shadow: 0 4px 12px rgba(200, 30, 30, 0.2);
+}
+
+.dispute-actions .action-btn.resolve {
+  background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+  color: #15803d;
+}
+
+.dispute-actions .action-btn.resolve:hover {
+  background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+  box-shadow: 0 4px 12px rgba(21, 128, 61, 0.2);
+}
+
+/* Loading State for Dispute Action Buttons */
+.dispute-actions .action-btn.loading {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.dispute-actions .action-btn.loading::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 2px solid transparent;
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  right: 12px;
+}
+
+.dispute-actions .action-btn.loading svg {
+  opacity: 0;
+}
+
+.no-items-placeholder {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--admin-text-secondary);
+  background: linear-gradient(135deg, #fafbfc, #f8f9fa);
+  border-radius: 14px;
+  border: 2px dashed var(--admin-border);
+}
+
+/* Moderator Mailbox Tab */
+.moderator-mailbox-container h3 {
+  margin-bottom: 8px;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.moderator-mailbox-container p {
+  color: var(--admin-text-secondary);
+  margin-bottom: 28px;
+  line-height: 1.6;
+}
+
+.dispute-actions .action-btn.reply {
+  background: linear-gradient(135deg, #eef2ff, #e0e7ff);
+  color: #4338ca;
+}
+
+.dispute-actions .action-btn.reply:hover {
+  background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
+  box-shadow: 0 4px 12px rgba(67, 56, 202, 0.2);
+}
+
+.dispute-actions .action-btn.delete {
+  background: linear-gradient(135deg, #fef2f2, #fee2e2);
+  color: #ef4444;
+}
+
+.dispute-actions .action-btn.delete:hover {
+  background: linear-gradient(135deg, #fee2e2, #fecaca);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+}
+
+.mailbox-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 16px;
+}
+
+.mailbox-actions .clear-all-btn {
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #fef2f2, #fee2e2);
+  color: #ef4444;
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.mailbox-actions .clear-all-btn:hover {
+  background: linear-gradient(135deg, #fee2e2, #fecaca);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+}
+
+/* Loading State for Clear All Button */
+.mailbox-actions .clear-all-btn.loading {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.mailbox-actions .clear-all-btn.loading::after {
+  content: "";
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 2px solid transparent;
+  border-top-color: currentColor;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.mailbox-filter-controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--admin-border);
+}
+
+.mailbox-filter-controls button {
+  padding: 10px 20px;
+  border: 2px solid var(--admin-border);
+  background-color: white;
+  color: var(--admin-text-secondary);
+  border-radius: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 14px;
+}
+
+.mailbox-filter-controls button.active,
+.mailbox-filter-controls button:hover {
+  background: linear-gradient(135deg, var(--admin-primary-blue), #0c63d4);
+  color: white;
+  border-color: var(--admin-primary-blue);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(24, 119, 242, 0.2);
+}
+
+.reply-form-container {
+  background: linear-gradient(135deg, #ffffff 0%, #fafbfc 100%);
+  padding: 24px;
+  border-radius: 14px;
+  border: 1px solid var(--admin-border);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.reply-form-container h4 {
+  margin-top: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--admin-text-primary);
+}
+
+.original-message-quote {
+  margin: 0 0 20px 0;
+  padding: 16px;
+  background-color: var(--admin-bg);
+  border-left: 4px solid var(--admin-primary-blue);
+  font-style: italic;
+  color: var(--admin-text-secondary);
+  border-radius: 0 10px 10px 0;
+  line-height: 1.5;
+}
+
+.reply-form-container textarea {
+  width: 100%;
+  min-height: 130px;
+  padding: 14px;
+  border-radius: 10px;
+  border: 2px solid var(--admin-border);
+  margin-bottom: 12px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: inherit;
+  font-size: 14px;
+  resize: vertical;
+}
+
+.reply-form-container textarea:focus {
+  outline: none;
+  border-color: var(--admin-primary-blue);
+  background-color: white;
+  box-shadow: 0 0 0 4px rgba(24, 119, 242, 0.1);
+}
+
+.reply-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.reply-actions button {
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.send-reply-btn {
+  background: linear-gradient(135deg, var(--admin-primary-blue), #0c63d4);
+  color: white;
+}
+
+.send-reply-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(24, 119, 242, 0.3);
+}
+
+.send-reply-btn:active {
+  transform: translateY(0);
+}
+
+/* Loading State for Send Reply Button */
+.send-reply-btn.loading {
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.send-reply-btn.loading::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.cancel-reply-btn {
+  background-color: var(--admin-bg);
+  color: var(--admin-text-secondary);
+  border: 2px solid var(--admin-border);
+}
+
+.cancel-reply-btn:hover {
+  background-color: #e5e7eb;
+  border-color: var(--admin-text-secondary);
+}
+
+/* --- NEW: Reply Form Styles (from m-inbox-modal) --- */
+.inbox-reply-form {
+  margin-top: 20px;
+  padding: 24px;
+  border-radius: 14px;
+  border: 1px solid var(--admin-border);
+  background: linear-gradient(135deg, #ffffff 0%, #fafbfc 100%);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.inbox-reply-form h4 {
+  margin-top: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--admin-text-primary);
+}
+
+.inbox-reply-form textarea {
+  width: 100%;
+  min-height: 130px;
+  padding: 14px;
+  border-radius: 10px;
+  border: 2px solid var(--admin-border);
+  margin-bottom: 12px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-family: inherit;
+  font-size: 14px;
+  resize: vertical;
+}
+
+.inbox-reply-form textarea:focus {
+  outline: none;
+  border-color: var(--admin-primary-blue);
+  background-color: white;
+  box-shadow: 0 0 0 4px rgba(24, 119, 242, 0.1);
+}
